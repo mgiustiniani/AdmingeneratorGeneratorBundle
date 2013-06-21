@@ -42,6 +42,8 @@ class EchoExtension extends \Twig_Extension
             'echo_trans'        => new \Twig_Function_Method($this, 'getEchoTrans'),
             'echo_twig_assoc'   => new \Twig_Function_Method($this, 'getEchoTwigAssoc'),
             'echo_twig_filter'  => new \Twig_Function_Method($this, 'getEchoTwigFilter'),
+            'echo_include'      => new \Twig_Function_Method($this, 'getEchoInclude'),
+            'echo_render'       => new \Twig_Function_Method($this, 'getEchoRender'),
         );
     }
 
@@ -50,6 +52,7 @@ class EchoExtension extends \Twig_Extension
         return array(
             'as_php'          => new \Twig_Filter_Method($this, 'asPhp'),
             'convert_as_form' => new \Twig_Filter_Method($this, 'convertAsForm'),
+            'php_name'          => new \Twig_Filter_Method($this, 'phpName'),
         );
     }
 
@@ -136,6 +139,19 @@ class EchoExtension extends \Twig_Extension
 
        return $str;
 
+    }
+
+    /**
+     * Converts string into valid PHP function name
+     * 
+     * @param string $str
+     * @return string
+     */
+    public function phpName($str)
+    {
+        $str = preg_replace('/[^\w]+/', '', $str);
+
+        return $str;
     }
 
     public function export($variable)
@@ -307,9 +323,9 @@ class EchoExtension extends \Twig_Extension
               ? strtr('{{ path("%%path%%") }}', array('%%path%%' => $path))
               : strtr('{{ path("%%path%%")|%%filters%% }}', array('%%path%%' => $path, '%%filters%%' => (is_array($filters) ? implode('|', $filters) : $filters) ));
         }
-        
-        $params = preg_replace('/\{\{\s+?([\w\.]+)\s+?\}\}/i', '$1', $params);        
-        
+
+        $params = preg_replace('/\{\{\s+?([\w\.]+)\s+?\}\}/i', '$1', $params);
+
         return (null === $filters)
           ? strtr('{{ path("%%path%%", %%params%%) }}', array('%%path%%' => $path, '%%params%%' => $params))
           : strtr('{{ path("%%path%%", %%params%%)|%%filters%% }}', array('%%path%%' => $path, '%%params%%' => $params, '%%filters%%' => (is_array($filters) ? implode('|', $filters) : $filters) ));
@@ -369,6 +385,7 @@ class EchoExtension extends \Twig_Extension
     public function getEchoBlock($name)
     {
         $this->blockNames[] = $name;
+
         return str_replace('%%name%%', $name, '{% block %%name%% %}');
     }
 
@@ -435,6 +452,18 @@ class EchoExtension extends \Twig_Extension
         }
 
         return '{ ' . implode(', ', $contents) . ' }';
+    }
+
+    public function getEchoInclude($twig)
+    {
+        return '{% include "'.$twig.'" %}';
+    }
+
+    public function getEchoRender($controller, array $params = array())
+    {
+        $params = $this->getEchoTwigAssoc($params);
+
+        return '{% render(controller("'.$controller.'", '.$params.')) %}';
     }
 
     /**

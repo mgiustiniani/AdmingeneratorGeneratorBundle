@@ -50,7 +50,7 @@
             var that = this;
 
             // Hide submit button
-            $(that.element).find(that.options.submitSelector).hide();
+            $(that.element).find(that.options.submitSelector).remove();
             
             // Select container
             var $batch    = $(that.element).find('input[name="selected[]"]');
@@ -93,7 +93,7 @@
             	return false;
             }
             
-            $(this.element).find(this.options.submitSelector).click();
+            $(this.$selector).closest('form').submit();
         }
     };
 

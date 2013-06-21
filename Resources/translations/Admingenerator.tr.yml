@@ -16,8 +16,10 @@ boolean:
 
 # Pager
 pagerfanta:
-  previous: Önceki
-  next:     Sonraki
+  previous:       Önceki
+  next:           Sonraki
+  view.perpage:   Göster
+  num.elements:   %number% element
 
 # List
 list:
@@ -76,6 +78,8 @@ action.object.edit:
 action.object.delete:
   label:    Sil
   confirm:  Bu öğeyi silmek istediğinize emin misiniz?
+  success:  Eleman başarıyla silindi.
+  error:    Eleman silinemez.
 action.object.show:
   label:    Göster
 
@@ -85,6 +89,14 @@ action.batch.delete:
   confirm:  Seçili tüm öğeleri silmek istediğinize emin misiniz?
   success:  Öğeler başarıyla silindi.
   error:    Öğeler silinirken bir hata oluştu.
+
+# Custom actions
+action.custom:
+  title:    Eğer %name% eylem yürütmek istediğinizden emin misiniz?
+  success:  Eylem %name% başarıyla idam edildi.
+  error:    Eylem %name% yürütmek olamazdı.
+  confirm:  Onaylamak
+  cancel:   Iptal
 
 # Batch list
 batch.list:

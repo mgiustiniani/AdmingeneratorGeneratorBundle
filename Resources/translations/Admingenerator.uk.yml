@@ -16,8 +16,10 @@ boolean:
 
 # Pager
 pagerfanta:
-  previous: Поп
-  next:     Наст
+  previous:       Поп
+  next:           Наст
+  view.perpage:   Показати 
+  num.elements:   %number% елементів
 
 # List
 list:
@@ -84,6 +86,8 @@ action.object.edit:
 action.object.delete:
   label:    Видалити
   confirm:  Ви дійсно хочете видалити цей елемент?
+  success:  Елемент успішно видалено.
+  error:    Елемент не може бути видалений.
 action.object.show:
   label:    Переглянути
 
@@ -93,6 +97,14 @@ action.batch.delete:
   confirm:  Ви підтверджуєте видалення обраних елементів?
   success:  Записи успішно видалені.
   error:    Неможливо видалити записи.
+
+# Custom actions
+action.custom:
+  title:    Ви впевнені, що хочете виконати дію %name%?
+  success:  Дія %name% успішно виконано.
+  error:    Не вдалося виконати %name% діям.
+  confirm:  Підтверджувати
+  cancel:   Скасувати
 
 # Batch list
 batch.list:
