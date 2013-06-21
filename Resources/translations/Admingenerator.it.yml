@@ -120,3 +120,10 @@ filetype:
   text-document:    Documento<br />di testo
   unknown:          Tipo di file<br />sconosciuto
   video:            Video
+
+delete.action:
+  confirm: Conferma
+  cancel: Annulla
+  
+paginator.list:
+  maxPerPage: Numero elementi per pagina
